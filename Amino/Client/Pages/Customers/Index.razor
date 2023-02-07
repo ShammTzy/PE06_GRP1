@@ -30,22 +30,23 @@ else
     <tbody>
         @foreach (var customer in Customers)
         {
-<tr>
-    <td>@customer.Address</td>
-    <td>@customer.ContactNumber</td>
-    <td>@customer.EmailAddress</td>
-    <td>
-        <a href="/customers/view/@customer.Id" class="btn btn-primary">
-            <span class="oi oi-book"></span>
-        </a>
-        <a href="/customers/edit/@customer.Id" class="btn btn-warning">
-            <span class="oi oi-pencil"></span>
-        </a>
-        <button class="btn btn-danger" @onclick="@(()=>Delete(customer.Id))">
-            <span class="oi oi-delete"></span>
-        </button>
-    </td>
-</tr>
+        <tr>
+            <td>@customer.FirstName @customer.LastName</td>
+            <td>@customer.Address</td>
+            <td>@customer.ContactNumber</td>
+            <td>@customer.EmailAddress</td>
+            <td>
+                <a href="/customers/view/@customer.Id" class="btn btn-primary">
+                    <span class="oi oi-book"></span>
+                </a>
+                <a href="/customers/edit/@customer.Id" class="btn btn-warning">
+                    <span class="oi oi-pencil"></span>
+                </a>
+                <button class="btn btn-danger" @onclick="@(()=>Delete(customer.Id))">
+                    <span class="oi oi-delete"></span>
+                </button>
+            </td>
+        </tr>
 }
     </tbody>
 </table>}
@@ -71,12 +72,12 @@ else
 
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {
-        await js.InvokeVoidAsync("AddDataTable", "#gamesTable");
+        await js.InvokeVoidAsync("AddDataTable", "#customersTable");
     }
 
     public void Dispose()
     {
-        js.InvokeVoidAsync("DataTablesDispose", "#gamesTable");
+        js.InvokeVoidAsync("DataTablesDispose", "#customersTable");
     }
 
 }

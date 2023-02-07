@@ -9,5 +9,6 @@ namespace Amino.Shared.Domain
     public class Game : BaseDomainModel
     {
         public string Name { get; set; }
+        public string Price { get; set; }
     }
 }

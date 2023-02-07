@@ -29,6 +29,7 @@ namespace Amino.Server.Data
         {
             base.OnModelCreating(builder);
             builder.ApplyConfiguration(new GameSeedConfiguration());
+            //builder.ApplyConfiguration(new PaymentSeedConfiguration());
             builder.ApplyConfiguration(new PlatformSeedConfiguration());
             builder.ApplyConfiguration(new RoleSeedConfiguration());
             builder.ApplyConfiguration(new UserRoleSeedConfiguration());

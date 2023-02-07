@@ -17,6 +17,7 @@ namespace Amino.Server.Configurations
                 {
                     Id = 1,
                     Name = "God Of War Ragnarok",
+                    Price = "$75",
                     DateCreated = DateTime.Now,
                     DateUpdated = DateTime.Now,
                     CreatedBy = "System",
@@ -26,6 +27,7 @@ namespace Amino.Server.Configurations
                 {
                     Id = 2,
                     Name = "Elden Ring",
+                    Price = "$70",
                     DateCreated = DateTime.Now,
                     DateUpdated = DateTime.Now,
                     CreatedBy = "System",
@@ -35,6 +37,7 @@ namespace Amino.Server.Configurations
                 {
                     Id = 3,
                     Name = "Sekiro",
+                    Price = "$55",
                     DateCreated = DateTime.Now,
                     DateUpdated = DateTime.Now,
                     CreatedBy = "System",
@@ -44,6 +47,7 @@ namespace Amino.Server.Configurations
                 {
                     Id = 4,
                     Name = "Minecraft",
+                    Price = "$35",
                     DateCreated = DateTime.Now,
                     DateUpdated = DateTime.Now,
                     CreatedBy = "System",
@@ -53,6 +57,7 @@ namespace Amino.Server.Configurations
                 {
                     Id = 5,
                     Name = "Gta V",
+                    Price = "$30",
                     DateCreated = DateTime.Now,
                     DateUpdated = DateTime.Now,
                     CreatedBy = "System",

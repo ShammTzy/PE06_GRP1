@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Amino.Server.Data.Migrations
+namespace Amino.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230207074618_AddApplicationTables")]
-    partial class AddApplicationTables
+    [Migration("20230207115912_newDb")]
+    partial class newDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -90,6 +90,26 @@ namespace Amino.Server.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "a66ddf14-90a4-4b09-83c0-0cb62d47bdce",
+                            Email = "admin@localhost.com",
+                            EmailConfirmed = false,
+                            FirstName = "Admin",
+                            LastName = "User",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@LOCALHOST.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEA3/zFlsyDEkPb4rMhS/S+0afJf/NxHXxcy/0LQBEeAyyw1WCk8OFxIvj4jbzI6qig==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "48b31e93-16ee-42a0-9811-9e894fef579a",
+                            TwoFactorEnabled = false,
+                            UserName = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("Amino.Shared.Domain.Customer", b =>
@@ -103,6 +123,7 @@ namespace Amino.Server.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ContactNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreatedBy")
@@ -115,7 +136,18 @@ namespace Amino.Server.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("EmailAddress")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -144,12 +176,67 @@ namespace Amino.Server.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Price")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Games");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2023, 2, 7, 19, 59, 12, 134, DateTimeKind.Local).AddTicks(8740),
+                            DateUpdated = new DateTime(2023, 2, 7, 19, 59, 12, 135, DateTimeKind.Local).AddTicks(6980),
+                            Name = "God Of War Ragnarok",
+                            Price = "$75",
+                            UpdatedBy = "System"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2023, 2, 7, 19, 59, 12, 135, DateTimeKind.Local).AddTicks(7895),
+                            DateUpdated = new DateTime(2023, 2, 7, 19, 59, 12, 135, DateTimeKind.Local).AddTicks(7901),
+                            Name = "Elden Ring",
+                            Price = "$70",
+                            UpdatedBy = "System"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2023, 2, 7, 19, 59, 12, 135, DateTimeKind.Local).AddTicks(7903),
+                            DateUpdated = new DateTime(2023, 2, 7, 19, 59, 12, 135, DateTimeKind.Local).AddTicks(7904),
+                            Name = "Sekiro",
+                            Price = "$55",
+                            UpdatedBy = "System"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2023, 2, 7, 19, 59, 12, 135, DateTimeKind.Local).AddTicks(7905),
+                            DateUpdated = new DateTime(2023, 2, 7, 19, 59, 12, 135, DateTimeKind.Local).AddTicks(7906),
+                            Name = "Minecraft",
+                            Price = "$35",
+                            UpdatedBy = "System"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2023, 2, 7, 19, 59, 12, 135, DateTimeKind.Local).AddTicks(7907),
+                            DateUpdated = new DateTime(2023, 2, 7, 19, 59, 12, 135, DateTimeKind.Local).AddTicks(7908),
+                            Name = "Gta V",
+                            Price = "$30",
+                            UpdatedBy = "System"
+                        });
                 });
 
             modelBuilder.Entity("Amino.Shared.Domain.Order", b =>
@@ -177,9 +264,6 @@ namespace Amino.Server.Data.Migrations
                     b.Property<string>("OrderName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PaymentId")
-                        .HasColumnType("int");
-
                     b.Property<int>("PlatformId")
                         .HasColumnType("int");
 
@@ -191,8 +275,6 @@ namespace Amino.Server.Data.Migrations
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("GameId");
-
-                    b.HasIndex("PaymentId");
 
                     b.HasIndex("PlatformId");
 
@@ -261,6 +343,35 @@ namespace Amino.Server.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Platforms");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2023, 2, 7, 19, 59, 12, 137, DateTimeKind.Local).AddTicks(187),
+                            DateUpdated = new DateTime(2023, 2, 7, 19, 59, 12, 137, DateTimeKind.Local).AddTicks(202),
+                            Name = "Playstation",
+                            UpdatedBy = "System"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2023, 2, 7, 19, 59, 12, 137, DateTimeKind.Local).AddTicks(206),
+                            DateUpdated = new DateTime(2023, 2, 7, 19, 59, 12, 137, DateTimeKind.Local).AddTicks(207),
+                            Name = "Xbox",
+                            UpdatedBy = "System"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2023, 2, 7, 19, 59, 12, 137, DateTimeKind.Local).AddTicks(208),
+                            DateUpdated = new DateTime(2023, 2, 7, 19, 59, 12, 137, DateTimeKind.Local).AddTicks(209),
+                            Name = "PC",
+                            UpdatedBy = "System"
+                        });
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.DeviceFlowCodes", b =>
@@ -391,6 +502,22 @@ namespace Amino.Server.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "ad2bcf0c-20db-474f-8407-5a6b159518ba",
+                            ConcurrencyStamp = "ddbf9b5a-286b-4727-864f-91b4d8fa9ba1",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        },
+                        new
+                        {
+                            Id = "bd2bcf0c-20db-474f-8407-5a6b159518bb",
+                            ConcurrencyStamp = "366d87ce-e2a5-4eda-8173-7898c68d86e0",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -478,6 +605,13 @@ namespace Amino.Server.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "3781efa7-66dc-47f0-860f-e506d04102e4",
+                            RoleId = "ad2bcf0c-20db-474f-8407-5a6b159518ba"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -512,10 +646,6 @@ namespace Amino.Server.Data.Migrations
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Amino.Shared.Domain.Payment", null)
-                        .WithMany("Orders")
-                        .HasForeignKey("PaymentId");
 
                     b.HasOne("Amino.Shared.Domain.Platform", "Platform")
                         .WithMany()
@@ -599,11 +729,6 @@ namespace Amino.Server.Data.Migrations
                 });
 
             modelBuilder.Entity("Amino.Shared.Domain.Customer", b =>
-                {
-                    b.Navigation("Orders");
-                });
-
-            modelBuilder.Entity("Amino.Shared.Domain.Payment", b =>
                 {
                     b.Navigation("Orders");
                 });
