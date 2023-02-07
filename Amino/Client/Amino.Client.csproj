@@ -23,7 +23,6 @@
 
   <ItemGroup>
     <Folder Include="Pages\Platforms\" />
-    <Folder Include="Pages\Orders\" />
     <Folder Include="Pages\Payments\" />
   </ItemGroup>
 
