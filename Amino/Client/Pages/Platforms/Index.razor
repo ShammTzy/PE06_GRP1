@@ -1,0 +1,78 @@
+﻿@page "/platforms/"
+@inject HttpClient  _client
+@inject IJSRuntime js
+@implements IDisposable
+@attribute [Authorize]
+
+<h3 class="card-title">Game Orders</h3>
+<br />
+<a href="/bookings/create" class="btn btn-secondary">
+    <span class="oi oi-plus"></span>
+    Create New Platforms
+</a>
+<br />
+<br />
+
+@if (Platforms == null)
+{
+<div class="alert alert-info">Loading Platforms...</div> }
+else
+{
+<table class="table" id="platformsTable">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Actions</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var platform in Platforms)
+        {
+<tr>
+    <td>@platform.Name</td>
+    <td>
+        <a href="/platforms/view/@platform.Id" class="btn btn-primary">
+            <span class="oi oi-book"></span>
+        </a>
+        <a href="/platforms/edit/@platform.Id" class="btn btn-warning">
+            <span class="oi oi-pencil"></span>
+        </a>
+        <button class="btn btn-danger" @onclick="@(()=>Delete(platform.Id))">
+            <span class="oi oi-delete"></span>
+        </button>
+    </td>
+</tr>
+}
+    </tbody>
+</table>}
+
+@code 
+{ private List<Platform> Platforms;
+
+            protected async override Task OnInitializedAsync()
+            {
+                Platforms = await _client.GetFromJsonAsync<List<Platform>>($"{Endpoints.PlatformsEndPoint}");
+            }
+
+            async Task Delete(int platformId)
+            {
+                var platform = Platforms.First(x => x.Id == platformId);
+                bool confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {platform.Name}?");
+                if (confirm)
+                {
+                    await _client.DeleteAsync($"{Endpoints.PaymentsEndPoint}/{platformId}");
+                    await OnInitializedAsync();
+                }
+            }
+
+            protected async override Task OnAfterRenderAsync(bool firstRender)
+            {
+                await js.InvokeVoidAsync("AddDataTable", "#platformsTable");
+            }
+
+            public void Dispose()
+            {
+                js.InvokeVoidAsync("DataTablesDispose", "#platformsTable");
+            } }
+
