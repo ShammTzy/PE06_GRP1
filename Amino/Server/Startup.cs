@@ -1,5 +1,7 @@
 using Amino.Server.Data;
 using Amino.Server.Models;
+using Amino.Server.IRepository;
+using Amino.Server.Repository;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -40,6 +42,7 @@ namespace Amino.Server
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
