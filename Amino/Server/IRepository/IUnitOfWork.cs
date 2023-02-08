@@ -16,6 +16,8 @@ namespace Amino.Server.IRepository
         IGenericRepository<Payment> Payments { get; }
         IGenericRepository<Platform> Platforms { get; }
         IGenericRepository<Customer> Customers { get; }
+        IGenericRepository<PayType> PayTypes { get; }
+
 
     }
 }

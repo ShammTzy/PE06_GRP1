@@ -14,5 +14,7 @@ namespace Amino.Client.Static
         public static readonly string PaymentsEndPoint = $"{Prefix}/payments";
         public static readonly string PlatformsEndPoint = $"{Prefix}/platforms";
         public static readonly string CustomersEndPoint = $"{Prefix}/customers";
+        public static readonly string PayTypesEndPoint = $"{Prefix}/paytypes";
+
     }
 }

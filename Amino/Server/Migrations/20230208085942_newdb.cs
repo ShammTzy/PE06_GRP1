@@ -107,6 +107,23 @@ namespace Amino.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PayTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PayTypes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PersistedGrants",
                 columns: table => new
                 {
@@ -257,6 +274,7 @@ namespace Amino.Server.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     GameId = table.Column<int>(type: "int", nullable: false),
                     PlatformId = table.Column<int>(type: "int", nullable: false),
+                    PayTypeId = table.Column<int>(type: "int", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -276,6 +294,12 @@ namespace Amino.Server.Migrations
                         name: "FK_Orders_Games_GameId",
                         column: x => x.GameId,
                         principalTable: "Games",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Orders_PayTypes_PayTypeId",
+                        column: x => x.PayTypeId,
+                        principalTable: "PayTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -322,25 +346,34 @@ namespace Amino.Server.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "fe40178f-b0f8-4997-8aea-a47427a9b9b0", "Administrator", "ADMINISTRATOR" },
-                    { "bd2bcf0c-20db-474f-8407-5a6b159518bb", "a41d441e-6e61-4491-b3d4-c1073aa2961f", "User", "USER" }
+                    { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "b7e4f68d-a896-49cd-9de1-d4473893150c", "Administrator", "ADMINISTRATOR" },
+                    { "bd2bcf0c-20db-474f-8407-5a6b159518bb", "747e8e05-d7d5-4f31-b15f-5b2a82351915", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "b4c36a0a-542c-4ab0-832d-8e9f1a130a77", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEO53JgfXfCvqQKwV3zcEEP+Geysn+INpWGbq7/78nSSQzOh+OgBR4k8zi/vdVZeAHg==", null, false, "19eec348-8654-455d-a3db-ff8b94672cfc", false, "Admin" });
+                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "b5189cf8-4d0a-4b94-aef7-2c58432e1b94", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEE1bhEDQvgFZqDnO98z/YAVuTOOh6fe0clXvppqZlioW0fBlFclR0di8BdXxjtn+Fg==", null, false, "56275a04-81aa-4d7b-b3cf-658323946fb8", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "Games",
                 columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "Name", "Price", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, "System", new DateTime(2023, 2, 8, 15, 29, 6, 806, DateTimeKind.Local).AddTicks(5034), new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(4753), "God Of War Ragnarok", "$75", "System" },
-                    { 2, "System", new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(5820), new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(5827), "Elden Ring", "$70", "System" },
-                    { 3, "System", new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(5829), new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(5830), "Sekiro", "$55", "System" },
-                    { 4, "System", new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(5832), new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(5833), "Minecraft", "$35", "System" },
-                    { 5, "System", new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(5834), new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(5835), "Gta V", "$30", "System" }
+                    { 1, "System", new DateTime(2023, 2, 8, 16, 59, 41, 783, DateTimeKind.Local).AddTicks(3753), new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2112), "God Of War Ragnarok", "$75", "System" },
+                    { 2, "System", new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2931), new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2936), "Elden Ring", "$70", "System" },
+                    { 3, "System", new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2938), new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2939), "Sekiro", "$55", "System" },
+                    { 4, "System", new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2940), new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2941), "Minecraft", "$35", "System" },
+                    { 5, "System", new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2942), new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2943), "Gta V", "$30", "System" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "PayTypes",
+                columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "Name", "UpdatedBy" },
+                values: new object[,]
+                {
+                    { 1, "System", new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(4431), new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(4440), "Debit Card", "System" },
+                    { 2, "System", new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(4443), new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(4444), "Credit Card", "System" }
                 });
 
             migrationBuilder.InsertData(
@@ -348,9 +381,9 @@ namespace Amino.Server.Migrations
                 columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "Name", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, "System", new DateTime(2023, 2, 8, 15, 29, 6, 808, DateTimeKind.Local).AddTicks(7859), new DateTime(2023, 2, 8, 15, 29, 6, 808, DateTimeKind.Local).AddTicks(7869), "Playstation", "System" },
-                    { 2, "System", new DateTime(2023, 2, 8, 15, 29, 6, 808, DateTimeKind.Local).AddTicks(7872), new DateTime(2023, 2, 8, 15, 29, 6, 808, DateTimeKind.Local).AddTicks(7873), "Xbox", "System" },
-                    { 3, "System", new DateTime(2023, 2, 8, 15, 29, 6, 808, DateTimeKind.Local).AddTicks(7874), new DateTime(2023, 2, 8, 15, 29, 6, 808, DateTimeKind.Local).AddTicks(7875), "PC", "System" }
+                    { 1, "System", new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(7362), new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(7368), "Playstation", "System" },
+                    { 2, "System", new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(7372), new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(7372), "Xbox", "System" },
+                    { 3, "System", new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(7374), new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(7375), "PC", "System" }
                 });
 
             migrationBuilder.InsertData(
@@ -417,6 +450,11 @@ namespace Amino.Server.Migrations
                 name: "IX_Orders_GameId",
                 table: "Orders",
                 column: "GameId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_PayTypeId",
+                table: "Orders",
+                column: "PayTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_PlatformId",
@@ -489,6 +527,9 @@ namespace Amino.Server.Migrations
 
             migrationBuilder.DropTable(
                 name: "Games");
+
+            migrationBuilder.DropTable(
+                name: "PayTypes");
 
             migrationBuilder.DropTable(
                 name: "Platforms");

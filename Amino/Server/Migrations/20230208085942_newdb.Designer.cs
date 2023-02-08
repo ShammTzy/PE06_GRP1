@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Amino.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230208072907_newdb")]
+    [Migration("20230208085942_newdb")]
     partial class newdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -96,7 +96,7 @@ namespace Amino.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b4c36a0a-542c-4ab0-832d-8e9f1a130a77",
+                            ConcurrencyStamp = "b5189cf8-4d0a-4b94-aef7-2c58432e1b94",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -104,9 +104,9 @@ namespace Amino.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEO53JgfXfCvqQKwV3zcEEP+Geysn+INpWGbq7/78nSSQzOh+OgBR4k8zi/vdVZeAHg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEE1bhEDQvgFZqDnO98z/YAVuTOOh6fe0clXvppqZlioW0fBlFclR0di8BdXxjtn+Fg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "19eec348-8654-455d-a3db-ff8b94672cfc",
+                            SecurityStamp = "56275a04-81aa-4d7b-b3cf-658323946fb8",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -191,8 +191,8 @@ namespace Amino.Server.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 8, 15, 29, 6, 806, DateTimeKind.Local).AddTicks(5034),
-                            DateUpdated = new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(4753),
+                            DateCreated = new DateTime(2023, 2, 8, 16, 59, 41, 783, DateTimeKind.Local).AddTicks(3753),
+                            DateUpdated = new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2112),
                             Name = "God Of War Ragnarok",
                             Price = "$75",
                             UpdatedBy = "System"
@@ -201,8 +201,8 @@ namespace Amino.Server.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(5820),
-                            DateUpdated = new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(5827),
+                            DateCreated = new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2931),
+                            DateUpdated = new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2936),
                             Name = "Elden Ring",
                             Price = "$70",
                             UpdatedBy = "System"
@@ -211,8 +211,8 @@ namespace Amino.Server.Migrations
                         {
                             Id = 3,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(5829),
-                            DateUpdated = new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(5830),
+                            DateCreated = new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2938),
+                            DateUpdated = new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2939),
                             Name = "Sekiro",
                             Price = "$55",
                             UpdatedBy = "System"
@@ -221,8 +221,8 @@ namespace Amino.Server.Migrations
                         {
                             Id = 4,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(5832),
-                            DateUpdated = new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(5833),
+                            DateCreated = new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2940),
+                            DateUpdated = new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2941),
                             Name = "Minecraft",
                             Price = "$35",
                             UpdatedBy = "System"
@@ -231,8 +231,8 @@ namespace Amino.Server.Migrations
                         {
                             Id = 5,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(5834),
-                            DateUpdated = new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(5835),
+                            DateCreated = new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2942),
+                            DateUpdated = new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2943),
                             Name = "Gta V",
                             Price = "$30",
                             UpdatedBy = "System"
@@ -261,6 +261,9 @@ namespace Amino.Server.Migrations
                     b.Property<int>("GameId")
                         .HasColumnType("int");
 
+                    b.Property<int>("PayTypeId")
+                        .HasColumnType("int");
+
                     b.Property<int>("PlatformId")
                         .HasColumnType("int");
 
@@ -273,9 +276,58 @@ namespace Amino.Server.Migrations
 
                     b.HasIndex("GameId");
 
+                    b.HasIndex("PayTypeId");
+
                     b.HasIndex("PlatformId");
 
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Amino.Shared.Domain.PayType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PayTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(4431),
+                            DateUpdated = new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(4440),
+                            Name = "Debit Card",
+                            UpdatedBy = "System"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(4443),
+                            DateUpdated = new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(4444),
+                            Name = "Credit Card",
+                            UpdatedBy = "System"
+                        });
                 });
 
             modelBuilder.Entity("Amino.Shared.Domain.Payment", b =>
@@ -346,8 +398,8 @@ namespace Amino.Server.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 8, 15, 29, 6, 808, DateTimeKind.Local).AddTicks(7859),
-                            DateUpdated = new DateTime(2023, 2, 8, 15, 29, 6, 808, DateTimeKind.Local).AddTicks(7869),
+                            DateCreated = new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(7362),
+                            DateUpdated = new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(7368),
                             Name = "Playstation",
                             UpdatedBy = "System"
                         },
@@ -355,8 +407,8 @@ namespace Amino.Server.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 8, 15, 29, 6, 808, DateTimeKind.Local).AddTicks(7872),
-                            DateUpdated = new DateTime(2023, 2, 8, 15, 29, 6, 808, DateTimeKind.Local).AddTicks(7873),
+                            DateCreated = new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(7372),
+                            DateUpdated = new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(7372),
                             Name = "Xbox",
                             UpdatedBy = "System"
                         },
@@ -364,8 +416,8 @@ namespace Amino.Server.Migrations
                         {
                             Id = 3,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 8, 15, 29, 6, 808, DateTimeKind.Local).AddTicks(7874),
-                            DateUpdated = new DateTime(2023, 2, 8, 15, 29, 6, 808, DateTimeKind.Local).AddTicks(7875),
+                            DateCreated = new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(7374),
+                            DateUpdated = new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(7375),
                             Name = "PC",
                             UpdatedBy = "System"
                         });
@@ -504,14 +556,14 @@ namespace Amino.Server.Migrations
                         new
                         {
                             Id = "ad2bcf0c-20db-474f-8407-5a6b159518ba",
-                            ConcurrencyStamp = "fe40178f-b0f8-4997-8aea-a47427a9b9b0",
+                            ConcurrencyStamp = "b7e4f68d-a896-49cd-9de1-d4473893150c",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "bd2bcf0c-20db-474f-8407-5a6b159518bb",
-                            ConcurrencyStamp = "a41d441e-6e61-4491-b3d4-c1073aa2961f",
+                            ConcurrencyStamp = "747e8e05-d7d5-4f31-b15f-5b2a82351915",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -644,6 +696,12 @@ namespace Amino.Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Amino.Shared.Domain.PayType", "PayType")
+                        .WithMany()
+                        .HasForeignKey("PayTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Amino.Shared.Domain.Platform", "Platform")
                         .WithMany()
                         .HasForeignKey("PlatformId")
@@ -651,6 +709,8 @@ namespace Amino.Server.Migrations
                         .IsRequired();
 
                     b.Navigation("Game");
+
+                    b.Navigation("PayType");
 
                     b.Navigation("Platform");
                 });

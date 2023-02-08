@@ -22,6 +22,8 @@ namespace Amino.Server.Repository
         private IGenericRepository<Order> _orders;
         private IGenericRepository<Payment> _payments;
         private IGenericRepository<Platform> _platforms;
+        private IGenericRepository<PayType> _paytypes;
+
 
 
         private UserManager<ApplicationUser> _userManager;
@@ -37,7 +39,8 @@ namespace Amino.Server.Repository
         public IGenericRepository<Order> Orders => _orders ??= new GenericRepository<Order>(_context);
         public IGenericRepository<Payment> Payments => _payments ??= new GenericRepository<Payment>(_context);
         public IGenericRepository<Platform> Platforms => _platforms ??= new GenericRepository<Platform>(_context);
-        
+        public IGenericRepository<PayType> PayTypes => _paytypes ??= new GenericRepository<PayType>(_context);
+
 
         public void Dispose()
         {

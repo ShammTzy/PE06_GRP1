@@ -1,0 +1,71 @@
+﻿@page "/paytypes/"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+<h3 class="card-title">Games</h3>
+<br />
+<a href="/paytypes/create" class="btn btn-secondary">
+    <span class="oi oi-plus"></span>
+    Create New Payment Type
+</a>
+<br />
+<br />
+
+@if (PayTypes == null)
+{
+<div class="alert alert-info">Loading PayType...</div> }
+            else
+            {
+<table class="table" id="gamesTable">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var paytype in PayTypes)
+        {
+<tr>
+    <td>@paytype.Name</td>
+    <td>
+        <a href="/paytypes/view/@paytype.Id" class="btn btn-primary">
+            <span class="oi oi-book"></span>
+        </a>
+        <a href="/paytype/edit/@paytype.Id" class="btn btn-warning">
+            <span class="oi oi-pencil"></span>
+        </a>
+        <button class="btn btn-danger" @onclick="@(()=>Delete(paytype.Id))">
+            <span class="oi oi-delete"></span>
+        </button>
+    </td>
+</tr>}
+    </tbody>
+</table>
+}
+@code {
+    private List<PayType> PayTypes;
+
+    protected async override Task OnInitializedAsync()
+    {
+        PayTypes = await _client.GetFromJsonAsync<List<PayType>>($"{Endpoints.PayTypesEndPoint}");
+    }
+
+    async Task Delete(int paytypeId)
+    {
+        var paytype = PayTypes.First(x => x.Id == paytypeId);
+        bool confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {paytype.Name}?");
+        if (confirm)
+        {
+            await _client.DeleteAsync($"{Endpoints.PayTypesEndPoint}/{paytypeId}");
+            await OnInitializedAsync();
+        }
+    }
+
+    public void Dispose()
+    {
+        js.InvokeVoidAsync("DataTablesDispose", "#gamesTable");
+    }
+
+}

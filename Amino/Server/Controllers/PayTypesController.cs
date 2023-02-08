@@ -14,48 +14,48 @@ namespace Amino.Server.Controllers
     //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class OrdersController : ControllerBase
+    public class PayTypesController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public OrdersController(IUnitOfWork unitOfWork)
+        public PayTypesController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        // GET: api/Orders
+        // GET: api/PayTypes
         [HttpGet]
-        public async Task<IActionResult> GetOrders()
+        public async Task<IActionResult> GetPayTypes()
         {
-            var orders = await _unitOfWork.Orders.GetAll(includes: q => q.Include(x => x.Game).Include(x => x.Platform).Include(x => x.PayType));
-            return Ok(orders);
+            var paytypes = await _unitOfWork.PayTypes.GetAll();
+            return Ok(paytypes);
         }
 
-        // GET: api/Makes/5
+        // GET: api/PayTypes/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetOrder(int id)
+        public async Task<IActionResult> GetPayTypes(int id)
         {
-            var order = await _unitOfWork.Orders.Get(q => q.Id == id);
+            var paytypes = await _unitOfWork.PayTypes.Get(q => q.Id == id);
 
-            if (order == null)
+            if (paytypes == null)
             {
                 return NotFound();
             }
 
-            return Ok(order);
+            return Ok(paytypes);
         }
 
-        // PUT: api/Makes/5
+        // PUT: api/PayTypes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutOrder(int id, Order order)
+        public async Task<IActionResult> PutPayTypes(int id, PayType paytype)
         {
-            if (id != order.Id)
+            if (id != paytype.Id)
             {
                 return BadRequest();
             }
 
-            _unitOfWork.Orders.Update(order);
+            _unitOfWork.PayTypes.Update(paytype);
 
             try
             {
@@ -63,7 +63,7 @@ namespace Amino.Server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!await OrderExistsAsync(id))
+                if (!await PayTypeExistsAsync(id))
                 {
                     return NotFound();
                 }
@@ -76,37 +76,37 @@ namespace Amino.Server.Controllers
             return NoContent();
         }
 
-        // POST: api/Makes
+        // POST: api/Customers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Order>> PostOrder(Order order)
+        public async Task<ActionResult<PayType>> PostPayType(PayType paytype)
         {
-            await _unitOfWork.Orders.Insert(order);
+            await _unitOfWork.PayTypes.Insert(paytype);
             await _unitOfWork.Save(HttpContext);
 
-            return CreatedAtAction("GetOrder", new { id = order.Id }, order);
+            return CreatedAtAction("GetPayType", new { id = paytype.Id }, paytype);
         }
 
-        // DELETE: api/Makes/5
+        // DELETE: api/Customers/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteOrder(int id)
+        public async Task<IActionResult> DeletePayType(int id)
         {
-            var order = _unitOfWork.Orders.Get(p => p.Id == id);
-            if (order == null)
+            var paytype = _unitOfWork.Customers.Get(p => p.Id == id);
+            if (paytype == null)
             {
                 return NotFound();
             }
 
-            await _unitOfWork.Orders.Delete(id);
+            await _unitOfWork.Customers.Delete(id);
             await _unitOfWork.Save(HttpContext);
 
             return NoContent();
         }
 
-        private async Task<bool> OrderExistsAsync(int id)
+        private async Task<bool> PayTypeExistsAsync(int id)
         {
-            var order = await _unitOfWork.Orders.Get(p => p.Id == id);
-            return order != null;
+            var paytype = await _unitOfWork.PayTypes.Get(p => p.Id == id);
+            return paytype != null;
         }
     }
 }

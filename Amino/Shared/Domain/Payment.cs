@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Amino.Shared.Domain
 {
-    public class Payment: BaseDomainModel
+    public class Payment : BaseDomainModel
     {
         public string PayMethod { get; set; }
         public virtual Customer Customer { get; set; }
         public int CustomerId { get; set; }
         public virtual Order Order { get; set; }
         public int OrderId { get; set; }
-        
+
     }
 }
