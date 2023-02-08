@@ -27,35 +27,35 @@ namespace Amino.Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetPayments()
         {
-            var makes = await _unitOfWork.Payments.GetAll();
-            return Ok(makes);
+            var payments = await _unitOfWork.Payments.GetAll(includes: q => q.Include(x => x.Customer).Include(x => x.Order));
+            return Ok(payments);
         }
 
         // GET: api/Makes/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPayment(int id)
         {
-            var make = await _unitOfWork.Payments.Get(q => q.Id == id);
+            var payment = await _unitOfWork.Payments.Get(q => q.Id == id);
 
-            if (make == null)
+            if (payment == null)
             {
                 return NotFound();
             }
 
-            return Ok(make);
+            return Ok(payment);
         }
 
         // PUT: api/Makes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPayment(int id, Payment make)
+        public async Task<IActionResult> PutPayment(int id, Payment payment)
         {
-            if (id != make.Id)
+            if (id != payment.Id)
             {
                 return BadRequest();
             }
 
-            _unitOfWork.Payments.Update(make);
+            _unitOfWork.Payments.Update(payment);
 
             try
             {
@@ -105,8 +105,8 @@ namespace Amino.Server.Controllers
 
         private async Task<bool> PaymentExistsAsync(int id)
         {
-            var make = await _unitOfWork.Payments.Get(p => p.Id == id);
-            return make != null;
+            var payment = await _unitOfWork.Payments.Get(p => p.Id == id);
+            return payment != null;
         }
     }
 }

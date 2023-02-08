@@ -27,35 +27,35 @@ namespace Amino.Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCustomers()
         {
-            var makes = await _unitOfWork.Customers.GetAll();
-            return Ok(makes);
+            var customers = await _unitOfWork.Customers.GetAll();
+            return Ok(customers);
         }
 
-        // GET: api/Makes/5
+        // GET: api/Customers/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCustomer(int id)
         {
-            var make = await _unitOfWork.Customers.Get(q => q.Id == id);
+            var customer = await _unitOfWork.Customers.Get(q => q.Id == id);
 
-            if (make == null)
+            if (customer == null)
             {
                 return NotFound();
             }
 
-            return Ok(make);
+            return Ok(customer);
         }
 
-        // PUT: api/Makes/5
+        // PUT: api/Customers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCustomer(int id, Customer make)
+        public async Task<IActionResult> PutCustomer(int id, Customer customer)
         {
-            if (id != make.Id)
+            if (id != customer.Id)
             {
                 return BadRequest();
             }
 
-            _unitOfWork.Customers.Update(make);
+            _unitOfWork.Customers.Update(customer);
 
             try
             {
@@ -76,7 +76,7 @@ namespace Amino.Server.Controllers
             return NoContent();
         }
 
-        // POST: api/Makes
+        // POST: api/Customers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
@@ -87,7 +87,7 @@ namespace Amino.Server.Controllers
             return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);
         }
 
-        // DELETE: api/Makes/5
+        // DELETE: api/Customers/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCustomer(int id)
         {
@@ -105,8 +105,8 @@ namespace Amino.Server.Controllers
 
         private async Task<bool> CustomerExistsAsync(int id)
         {
-            var make = await _unitOfWork.Customers.Get(p => p.Id == id);
-            return make != null;
+            var customer = await _unitOfWork.Customers.Get(p => p.Id == id);
+            return customer != null;
         }
     }
 }

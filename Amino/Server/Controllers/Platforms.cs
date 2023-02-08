@@ -27,35 +27,35 @@ namespace Amino.Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetPlatforms()
         {
-            var makes = await _unitOfWork.Platforms.GetAll();
-            return Ok(makes);
+            var platforms = await _unitOfWork.Platforms.GetAll();
+            return Ok(platforms);
         }
 
         // GET: api/Makes/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPlatform(int id)
         {
-            var make = await _unitOfWork.Platforms.Get(q => q.Id == id);
+            var platform = await _unitOfWork.Platforms.Get(q => q.Id == id);
 
-            if (make == null)
+            if (platform == null)
             {
                 return NotFound();
             }
 
-            return Ok(make);
+            return Ok(platform);
         }
 
         // PUT: api/Makes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPlatform(int id, Platform make)
+        public async Task<IActionResult> PutPlatform(int id, Platform platform)
         {
-            if (id != make.Id)
+            if (id != platform.Id)
             {
                 return BadRequest();
             }
 
-            _unitOfWork.Platforms.Update(make);
+            _unitOfWork.Platforms.Update(platform);
 
             try
             {
@@ -105,8 +105,8 @@ namespace Amino.Server.Controllers
 
         private async Task<bool> PlatformExistsAsync(int id)
         {
-            var make = await _unitOfWork.Platforms.Get(p => p.Id == id);
-            return make != null;
+            var platform = await _unitOfWork.Platforms.Get(p => p.Id == id);
+            return platform != null;
         }
     }
 }

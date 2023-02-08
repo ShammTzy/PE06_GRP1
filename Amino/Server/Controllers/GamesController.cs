@@ -27,35 +27,35 @@ namespace Amino.Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetGames()
         {
-            var makes = await _unitOfWork.Games.GetAll();
-            return Ok(makes);
+            var games = await _unitOfWork.Games.GetAll();
+            return Ok(games);
         }
 
         // GET: api/Makes/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetGame(int id)
         {
-            var make = await _unitOfWork.Games.Get(q => q.Id == id);
+            var game = await _unitOfWork.Games.Get(q => q.Id == id);
 
-            if (make == null)
+            if (game == null)
             {
                 return NotFound();
             }
 
-            return Ok(make);
+            return Ok(game);
         }
 
         // PUT: api/Makes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutGame(int id, Game make)
+        public async Task<IActionResult> PutGame(int id, Game game)
         {
-            if (id != make.Id)
+            if (id != game.Id)
             {
                 return BadRequest();
             }
 
-            _unitOfWork.Games.Update(make);
+            _unitOfWork.Games.Update(game);
 
             try
             {
@@ -105,8 +105,8 @@ namespace Amino.Server.Controllers
 
         private async Task<bool> GameExistsAsync(int id)
         {
-            var make = await _unitOfWork.Games.Get(p => p.Id == id);
-            return make != null;
+            var game = await _unitOfWork.Games.Get(p => p.Id == id);
+            return game != null;
         }
     }
 }
