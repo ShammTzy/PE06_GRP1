@@ -20,23 +20,21 @@
 }
 else
 {
-    <table class="table" id="ordersTable">
+    <table class="table table-responsive">
         <thead>
             <tr>
-                <th></th>
-                <th>Order Name</th>
                 <th>Game</th>
                 <th>Platform</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var order in Orders)
             {
+
                 <tr>
                     <td>@order.Game.Name</td>
                     <td>@order.Platform.Name</td>
-              
+
                     <td>
                         <a href="/orders/view/@order.Id" class="btn btn-primary">
                             <span class="oi oi-book"></span>
@@ -65,7 +63,7 @@ else
     async Task Delete(int orderId)
     {
         var order = Orders.First(x => x.Id == orderId);
-        bool confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {order.OrderName}?");
+        bool confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete ");
         if (confirm)
         {
             await _client.DeleteAsync($"{Endpoints.OrdersEndPoint}/{orderId}");
@@ -73,13 +71,9 @@ else
         }
     }
 
-    protected async override Task OnAfterRenderAsync(bool firstRender)
-    {
-        await js.InvokeVoidAsync("AddDataTable", "#ordersTable");
-    }
-
     public void Dispose()
     {
         js.InvokeVoidAsync("DataTablesDispose", "#ordersTable");
-    }
+    } 
+
 }

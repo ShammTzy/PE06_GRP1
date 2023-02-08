@@ -1,0 +1,57 @@
+﻿@inject HttpClient _client
+
+<EditForm Model="@Order" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <label>Game: </label>
+        <div>
+            <InputSelect @bind-Value="Order.GameId" class="form-control">
+                <option value="">-- Select Order --</option>
+                @if (Games != null)
+                {
+                    foreach (var game in Games)
+                    {
+                        <option value="@game.Id">@game.Name</option>}
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => Order.GameId)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Platform: </label>
+        <div>
+            <InputSelect @bind-Value="Order.PlatformId" class="form-control">
+                <option value="">-- Select Platform --</option>
+                @if (Platforms != null)
+                {
+                    foreach (var platform in Platforms)
+                    {
+                        <option value="@platform.Id">@platform.Name</option>}
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => Order.PlatformId)" />
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success btn-block">
+        Create Order
+    </button>
+</EditForm>
+<br />
+
+@code {
+    [Parameter] public bool Disabled { get; set; } = false;
+    [Parameter] public Order Order { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+    private IList<Game> Games;
+    private IList<Platform> Platforms;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Games = await _client.GetFromJsonAsync<List<Game>>(Endpoints.GamesEndPoint);
+        Platforms = await _client.GetFromJsonAsync<List<Platform>>(Endpoints.PlatformsEndPoint);
+    }
+
+}

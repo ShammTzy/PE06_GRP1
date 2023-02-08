@@ -27,35 +27,35 @@ namespace Amino.Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetOrders()
         {
-            var makes = await _unitOfWork.Orders.GetAll();
-            return Ok(makes);
+            var orders = await _unitOfWork.Orders.GetAll(includes: q => q.Include(x => x.Game).Include(x => x.Platform));
+            return Ok(orders);
         }
 
         // GET: api/Makes/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetOrder(int id)
         {
-            var make = await _unitOfWork.Orders.Get(q => q.Id == id);
+            var order = await _unitOfWork.Orders.Get(q => q.Id == id);
 
-            if (make == null)
+            if (order == null)
             {
                 return NotFound();
             }
 
-            return Ok(make);
+            return Ok(order);
         }
 
         // PUT: api/Makes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutOrder(int id, Order make)
+        public async Task<IActionResult> PutOrder(int id, Order order)
         {
-            if (id != make.Id)
+            if (id != order.Id)
             {
                 return BadRequest();
             }
 
-            _unitOfWork.Orders.Update(make);
+            _unitOfWork.Orders.Update(order);
 
             try
             {
@@ -105,8 +105,8 @@ namespace Amino.Server.Controllers
 
         private async Task<bool> OrderExistsAsync(int id)
         {
-            var make = await _unitOfWork.Orders.Get(p => p.Id == id);
-            return make != null;
+            var order = await _unitOfWork.Orders.Get(p => p.Id == id);
+            return order != null;
         }
     }
 }

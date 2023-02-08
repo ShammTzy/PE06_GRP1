@@ -1,5 +1,21 @@
-﻿<h3>Edit</h3>
+﻿@page "/orders/edit/{Id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
 
+<h3>Edit</h3>
 @code {
+    [Parameter] public int id { get; set; }
+    Order order = new Order();
 
+
+    //protected async override Task OnParametersSetAsync()
+    //{
+      //  order = await _client.GetFromJsonAsync(Endpoints.OrdersEndPoint, Id);
+   // }
+
+   // async Task EditOrder()
+    //{
+      // await _client.Update(EndPoints.VehiclesEndPoint, vehicle, id);
+        //_navManager.NavigateTo("/vehicles/");
+    //}
 }

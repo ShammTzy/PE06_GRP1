@@ -66,11 +66,6 @@ else
                 }
             }
 
-            protected async override Task OnAfterRenderAsync(bool firstRender)
-            {
-                await js.InvokeVoidAsync("AddDataTable", "#paymentsTable");
-            }
-
             public void Dispose()
             {
                 js.InvokeVoidAsync("DataTablesDispose", "#paymentsTable");
