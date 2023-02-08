@@ -18,6 +18,9 @@ namespace Amino.Shared.Domain
         public string LastName { get; set; }
 
         public string Address { get; set; }
+        [Required(ErrorMessage = "Enter Tax Id")]
+        [StringLength(15, MinimumLength = 2, ErrorMessage = "Tax Id does not meet length requirements")]
+        public string TaxId { get; set; }
 
         [Required]
         [DataType(DataType.PhoneNumber)]

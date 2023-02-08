@@ -4,7 +4,7 @@
 @implements IDisposable
 @attribute [Authorize]
 
-<h3 class="card-title">Game Orders</h3>
+<h3 class="card-title">Payment Orders</h3>
 <br />
 <a href="/payments/create" class="btn btn-secondary">
     <span class="oi oi-plus"></span>
@@ -22,33 +22,35 @@ else
     <thead>
         <tr>
             <th>Customer</th>
-            <th>Payment Method</th>
+            <th>Order</th>
 
         </tr>
     </thead>
     <tbody>
         @foreach (var payment in Payments)
         {
-<tr>
-    <td>@payment.Customer.Id</td>
-    <td>
-        <a href="/payments/view/@payment.Id" class="btn btn-primary">
-            <span class="oi oi-book"></span>
-        </a>
-        <a href="/payments/edit/@payment.Id" class="btn btn-warning">
-            <span class="oi oi-pencil"></span>
-        </a>
-        <button class="btn btn-danger" @onclick="@(()=>Delete(payment.Id))">
-            <span class="oi oi-delete"></span>
-        </button>
-    </td>
-</tr>
+        <tr>
+            <td>@payment.Customer.TaxId</td>
+            <td>@payment.Order.Id</td>
+            <td>
+                <a href="/payments/view/@payment.Id" class="btn btn-primary">
+                    <span class="oi oi-book"></span>
+                </a>
+                <a href="/payments/edit/@payment.Id" class="btn btn-warning">
+                    <span class="oi oi-pencil"></span>
+                </a>
+                <button class="btn btn-danger" @onclick="@(()=>Delete(payment.Id))">
+                    <span class="oi oi-delete"></span>
+                </button>
+            </td>
+        </tr>
 }
     </tbody>
 </table>}
 
 @code 
-{ private List<Payment> Payments;
+{ 
+    private List<Payment> Payments;
 
             protected async override Task OnInitializedAsync()
             {
@@ -69,5 +71,6 @@ else
             public void Dispose()
             {
                 js.InvokeVoidAsync("DataTablesDispose", "#paymentsTable");
-            } }
+            } 
+    }
 

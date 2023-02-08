@@ -55,7 +55,7 @@
     async Task Delete(int paytypeId)
     {
         var paytype = PayTypes.First(x => x.Id == paytypeId);
-        bool confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {paytype.Name}?");
+        bool confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete ");
         if (confirm)
         {
             await _client.DeleteAsync($"{Endpoints.PayTypesEndPoint}/{paytypeId}");

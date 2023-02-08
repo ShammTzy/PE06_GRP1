@@ -1,0 +1,61 @@
+﻿@inject HttpClient _client
+
+<EditForm Model="@Payment" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <label>Customer: </label>
+        <div>
+            <select @bind="Payment.CustomerId" class="form-control">
+                <option value="">-- Select Customer --</option>
+                @if (Customers != null)
+                {
+                    @foreach (var customer in Customers)
+                    {
+                        <option value="@customer.Id">@customer.TaxId | @customer.EmailAddress</option>}}
+            </select>
+            <ValidationMessage For="@(()=>Payment.CustomerId)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Order: </label>
+        <div>
+            <select @bind="Payment.OrderId" class="form-control">
+                <option value="">-- Select Orders --</option>
+                @if (Orders != null)
+                {
+                    @foreach (var order in Orders)
+                    {
+            <option value="@order.Id">@order.Game.Name | @order.Platform.Name | @order.PayType.Name</option>
+                    }
+                }
+            </select>
+            <ValidationMessage For="@(()=>Payment.OrderId)" />
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success btn-block">
+        Create Order
+    </button>
+</EditForm>
+<br />
+
+@code {
+    [Parameter] public bool Disabled { get; set; } = false;
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+    [Parameter] public Payment Payment { get; set; }
+
+
+    private IList<Order> Orders;
+    private IList<Customer> Customers;
+    
+
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        Orders = await _client.GetFromJsonAsync<List<Order>>(Endpoints.OrdersEndPoint);
+        Customers = await _client.GetFromJsonAsync<List<Customer>>(Endpoints.CustomersEndPoint);
+    }
+
+}

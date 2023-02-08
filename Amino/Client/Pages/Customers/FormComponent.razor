@@ -20,6 +20,13 @@
             </div>
         </div>
         <div class="form-group">
+            <label>Order Id:</label>
+            <div>
+                <InputText @bind-Value="Customer.TaxId" class="form-control" />
+                <ValidationMessage For="@(()=>Customer.TaxId)" />
+            </div>
+        </div>
+        <div class="form-group">
             <label>Contact Number:</label>
             <div>
                 <InputText @bind-Value="Customer.ContactNumber" class="form-control" />

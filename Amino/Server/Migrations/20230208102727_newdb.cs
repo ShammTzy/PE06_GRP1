@@ -57,6 +57,7 @@ namespace Amino.Server.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TaxId = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -346,25 +347,25 @@ namespace Amino.Server.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "b7e4f68d-a896-49cd-9de1-d4473893150c", "Administrator", "ADMINISTRATOR" },
-                    { "bd2bcf0c-20db-474f-8407-5a6b159518bb", "747e8e05-d7d5-4f31-b15f-5b2a82351915", "User", "USER" }
+                    { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "d1e971cd-4c6a-4457-b5b0-9e119a586cda", "Administrator", "ADMINISTRATOR" },
+                    { "bd2bcf0c-20db-474f-8407-5a6b159518bb", "818cf2e9-8d0d-469f-b57c-ddcdf4c97573", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "b5189cf8-4d0a-4b94-aef7-2c58432e1b94", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEE1bhEDQvgFZqDnO98z/YAVuTOOh6fe0clXvppqZlioW0fBlFclR0di8BdXxjtn+Fg==", null, false, "56275a04-81aa-4d7b-b3cf-658323946fb8", false, "Admin" });
+                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "5d7baa14-5aa8-4a1e-a94a-890e61a137c5", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEApcklTJY36MD8PqBke3lCbpsQ1TCuhEtqYMyYEX5huNTNCfAUzmjYBnvtTt2WuI/g==", null, false, "d74aa5dc-44c6-4217-a5c7-76e96c806703", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "Games",
                 columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "Name", "Price", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, "System", new DateTime(2023, 2, 8, 16, 59, 41, 783, DateTimeKind.Local).AddTicks(3753), new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2112), "God Of War Ragnarok", "$75", "System" },
-                    { 2, "System", new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2931), new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2936), "Elden Ring", "$70", "System" },
-                    { 3, "System", new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2938), new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2939), "Sekiro", "$55", "System" },
-                    { 4, "System", new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2940), new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2941), "Minecraft", "$35", "System" },
-                    { 5, "System", new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2942), new DateTime(2023, 2, 8, 16, 59, 41, 784, DateTimeKind.Local).AddTicks(2943), "Gta V", "$30", "System" }
+                    { 1, "System", new DateTime(2023, 2, 8, 18, 27, 27, 337, DateTimeKind.Local).AddTicks(2034), new DateTime(2023, 2, 8, 18, 27, 27, 338, DateTimeKind.Local).AddTicks(24), "God Of War Ragnarok", "$75", "System" },
+                    { 2, "System", new DateTime(2023, 2, 8, 18, 27, 27, 338, DateTimeKind.Local).AddTicks(839), new DateTime(2023, 2, 8, 18, 27, 27, 338, DateTimeKind.Local).AddTicks(844), "Elden Ring", "$70", "System" },
+                    { 3, "System", new DateTime(2023, 2, 8, 18, 27, 27, 338, DateTimeKind.Local).AddTicks(846), new DateTime(2023, 2, 8, 18, 27, 27, 338, DateTimeKind.Local).AddTicks(847), "Sekiro", "$55", "System" },
+                    { 4, "System", new DateTime(2023, 2, 8, 18, 27, 27, 338, DateTimeKind.Local).AddTicks(848), new DateTime(2023, 2, 8, 18, 27, 27, 338, DateTimeKind.Local).AddTicks(849), "Minecraft", "$35", "System" },
+                    { 5, "System", new DateTime(2023, 2, 8, 18, 27, 27, 338, DateTimeKind.Local).AddTicks(850), new DateTime(2023, 2, 8, 18, 27, 27, 338, DateTimeKind.Local).AddTicks(851), "Gta V", "$30", "System" }
                 });
 
             migrationBuilder.InsertData(
@@ -372,8 +373,8 @@ namespace Amino.Server.Migrations
                 columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "Name", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, "System", new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(4431), new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(4440), "Debit Card", "System" },
-                    { 2, "System", new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(4443), new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(4444), "Credit Card", "System" }
+                    { 1, "System", new DateTime(2023, 2, 8, 18, 27, 27, 339, DateTimeKind.Local).AddTicks(4059), new DateTime(2023, 2, 8, 18, 27, 27, 339, DateTimeKind.Local).AddTicks(4073), "Debit Card", "System" },
+                    { 2, "System", new DateTime(2023, 2, 8, 18, 27, 27, 339, DateTimeKind.Local).AddTicks(4079), new DateTime(2023, 2, 8, 18, 27, 27, 339, DateTimeKind.Local).AddTicks(4080), "Credit Card", "System" }
                 });
 
             migrationBuilder.InsertData(
@@ -381,9 +382,9 @@ namespace Amino.Server.Migrations
                 columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "Name", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, "System", new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(7362), new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(7368), "Playstation", "System" },
-                    { 2, "System", new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(7372), new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(7372), "Xbox", "System" },
-                    { 3, "System", new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(7374), new DateTime(2023, 2, 8, 16, 59, 41, 785, DateTimeKind.Local).AddTicks(7375), "PC", "System" }
+                    { 1, "System", new DateTime(2023, 2, 8, 18, 27, 27, 340, DateTimeKind.Local).AddTicks(150), new DateTime(2023, 2, 8, 18, 27, 27, 340, DateTimeKind.Local).AddTicks(158), "Playstation", "System" },
+                    { 2, "System", new DateTime(2023, 2, 8, 18, 27, 27, 340, DateTimeKind.Local).AddTicks(161), new DateTime(2023, 2, 8, 18, 27, 27, 340, DateTimeKind.Local).AddTicks(162), "Xbox", "System" },
+                    { 3, "System", new DateTime(2023, 2, 8, 18, 27, 27, 340, DateTimeKind.Local).AddTicks(164), new DateTime(2023, 2, 8, 18, 27, 27, 340, DateTimeKind.Local).AddTicks(165), "PC", "System" }
                 });
 
             migrationBuilder.InsertData(
