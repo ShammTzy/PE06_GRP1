@@ -94,7 +94,7 @@ namespace Amino.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d046faa2-7360-4ce0-800e-1c7526688281",
+                            ConcurrencyStamp = "b4c36a0a-542c-4ab0-832d-8e9f1a130a77",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -102,9 +102,9 @@ namespace Amino.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDviTJ1fz3blY1ZPzaqmvM5uFbUTZIymVV7ZgEBRPF/35MKPH5yZ1madY/hIY/khqw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEO53JgfXfCvqQKwV3zcEEP+Geysn+INpWGbq7/78nSSQzOh+OgBR4k8zi/vdVZeAHg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ef8fb4c6-a40d-43a8-a6fe-8c9447001b8a",
+                            SecurityStamp = "19eec348-8654-455d-a3db-ff8b94672cfc",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -189,8 +189,8 @@ namespace Amino.Server.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 8, 14, 51, 56, 166, DateTimeKind.Local).AddTicks(8715),
-                            DateUpdated = new DateTime(2023, 2, 8, 14, 51, 56, 167, DateTimeKind.Local).AddTicks(8137),
+                            DateCreated = new DateTime(2023, 2, 8, 15, 29, 6, 806, DateTimeKind.Local).AddTicks(5034),
+                            DateUpdated = new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(4753),
                             Name = "God Of War Ragnarok",
                             Price = "$75",
                             UpdatedBy = "System"
@@ -199,8 +199,8 @@ namespace Amino.Server.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 8, 14, 51, 56, 167, DateTimeKind.Local).AddTicks(9087),
-                            DateUpdated = new DateTime(2023, 2, 8, 14, 51, 56, 167, DateTimeKind.Local).AddTicks(9092),
+                            DateCreated = new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(5820),
+                            DateUpdated = new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(5827),
                             Name = "Elden Ring",
                             Price = "$70",
                             UpdatedBy = "System"
@@ -209,8 +209,8 @@ namespace Amino.Server.Migrations
                         {
                             Id = 3,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 8, 14, 51, 56, 167, DateTimeKind.Local).AddTicks(9094),
-                            DateUpdated = new DateTime(2023, 2, 8, 14, 51, 56, 167, DateTimeKind.Local).AddTicks(9095),
+                            DateCreated = new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(5829),
+                            DateUpdated = new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(5830),
                             Name = "Sekiro",
                             Price = "$55",
                             UpdatedBy = "System"
@@ -219,8 +219,8 @@ namespace Amino.Server.Migrations
                         {
                             Id = 4,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 8, 14, 51, 56, 167, DateTimeKind.Local).AddTicks(9097),
-                            DateUpdated = new DateTime(2023, 2, 8, 14, 51, 56, 167, DateTimeKind.Local).AddTicks(9098),
+                            DateCreated = new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(5832),
+                            DateUpdated = new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(5833),
                             Name = "Minecraft",
                             Price = "$35",
                             UpdatedBy = "System"
@@ -229,8 +229,8 @@ namespace Amino.Server.Migrations
                         {
                             Id = 5,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 8, 14, 51, 56, 167, DateTimeKind.Local).AddTicks(9099),
-                            DateUpdated = new DateTime(2023, 2, 8, 14, 51, 56, 167, DateTimeKind.Local).AddTicks(9100),
+                            DateCreated = new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(5834),
+                            DateUpdated = new DateTime(2023, 2, 8, 15, 29, 6, 807, DateTimeKind.Local).AddTicks(5835),
                             Name = "Gta V",
                             Price = "$30",
                             UpdatedBy = "System"
@@ -344,8 +344,8 @@ namespace Amino.Server.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 8, 14, 51, 56, 169, DateTimeKind.Local).AddTicks(1286),
-                            DateUpdated = new DateTime(2023, 2, 8, 14, 51, 56, 169, DateTimeKind.Local).AddTicks(1297),
+                            DateCreated = new DateTime(2023, 2, 8, 15, 29, 6, 808, DateTimeKind.Local).AddTicks(7859),
+                            DateUpdated = new DateTime(2023, 2, 8, 15, 29, 6, 808, DateTimeKind.Local).AddTicks(7869),
                             Name = "Playstation",
                             UpdatedBy = "System"
                         },
@@ -353,8 +353,8 @@ namespace Amino.Server.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 8, 14, 51, 56, 169, DateTimeKind.Local).AddTicks(1300),
-                            DateUpdated = new DateTime(2023, 2, 8, 14, 51, 56, 169, DateTimeKind.Local).AddTicks(1301),
+                            DateCreated = new DateTime(2023, 2, 8, 15, 29, 6, 808, DateTimeKind.Local).AddTicks(7872),
+                            DateUpdated = new DateTime(2023, 2, 8, 15, 29, 6, 808, DateTimeKind.Local).AddTicks(7873),
                             Name = "Xbox",
                             UpdatedBy = "System"
                         },
@@ -362,8 +362,8 @@ namespace Amino.Server.Migrations
                         {
                             Id = 3,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 8, 14, 51, 56, 169, DateTimeKind.Local).AddTicks(1303),
-                            DateUpdated = new DateTime(2023, 2, 8, 14, 51, 56, 169, DateTimeKind.Local).AddTicks(1304),
+                            DateCreated = new DateTime(2023, 2, 8, 15, 29, 6, 808, DateTimeKind.Local).AddTicks(7874),
+                            DateUpdated = new DateTime(2023, 2, 8, 15, 29, 6, 808, DateTimeKind.Local).AddTicks(7875),
                             Name = "PC",
                             UpdatedBy = "System"
                         });
@@ -502,14 +502,14 @@ namespace Amino.Server.Migrations
                         new
                         {
                             Id = "ad2bcf0c-20db-474f-8407-5a6b159518ba",
-                            ConcurrencyStamp = "4586e33c-378f-4a33-a89e-553f1a8b7144",
+                            ConcurrencyStamp = "fe40178f-b0f8-4997-8aea-a47427a9b9b0",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "bd2bcf0c-20db-474f-8407-5a6b159518bb",
-                            ConcurrencyStamp = "9a831795-2558-4b39-b296-21c2bd2af3b7",
+                            ConcurrencyStamp = "a41d441e-6e61-4491-b3d4-c1073aa2961f",
                             Name = "User",
                             NormalizedName = "USER"
                         });
