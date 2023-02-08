@@ -1,0 +1,23 @@
+﻿@page "/paytypes/edit/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>Edit Payment Method</h3>
+<FormComponent ButtonText="Update" OnValidSubmit="EditPayType" PayType="paytype" />
+
+@code {
+    [Parameter] public int id { get; set; }
+    PayType paytype = new PayType();
+
+
+    protected async override Task OnParametersSetAsync()
+    {
+        paytype = await _client.GetFromJsonAsync<PayType>($"{Endpoints.PayTypesEndPoint}/{id}");
+    }
+
+    async Task EditPayType()
+    {
+        await _client.PutAsJsonAsync($"{Endpoints.PayTypesEndPoint}/{id}", paytype);
+        _navManager.NavigateTo("/paytypes/");
+    }
+}

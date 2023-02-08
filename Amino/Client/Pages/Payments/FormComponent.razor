@@ -12,7 +12,8 @@
                 {
                     @foreach (var customer in Customers)
                     {
-                        <option value="@customer.Id">@customer.TaxId | @customer.EmailAddress</option>}}
+                        <option value="@customer.Id">@customer.TaxId | @customer.EmailAddress</option>
+}}
             </select>
             <ValidationMessage For="@(()=>Payment.CustomerId)" />
         </div>
@@ -26,7 +27,7 @@
                 {
                     @foreach (var order in Orders)
                     {
-            <option value="@order.Id">@order.Game.Name | @order.Platform.Name | @order.PayType.Name</option>
+                        <option value="@order.Id">@order.Game.Name | @order.Platform.Name | @order.PayType.Name</option>
                     }
                 }
             </select>
@@ -36,6 +37,7 @@
     <button type="submit" class="btn btn-success btn-block">
         Create Order
     </button>
+    <BackToList Target="payments" />
 </EditForm>
 <br />
 

@@ -1,0 +1,32 @@
+﻿@page "/platforms/create"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+@attribute [Authorize]
+
+<h3 class="card-title">Create New Platform</h3>
+<hr />
+<br />
+
+<FormComponent ButtonText="Create Platform" OnValidSubmit="CreatePlatform" Platform="platform" />
+<br />
+
+@code {
+    Platform platform = new Platform();
+
+    private IList<Platform> Platforms;
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        Platforms = await _client.GetFromJsonAsync<List<Platform>>($"{Endpoints.PlatformsEndPoint}");
+
+
+
+    }
+
+    private async Task CreatePlatform()
+    {
+        await _client.PostAsJsonAsync(Endpoints.PlatformsEndPoint, platform);
+        _navManager.NavigateTo("/platforms/");
+    }
+}

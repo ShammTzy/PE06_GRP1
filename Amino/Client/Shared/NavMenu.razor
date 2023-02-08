@@ -1,4 +1,7 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
+﻿@inject NavigationManager Navigation
+@inject SignOutSessionStateManager SignOutManager
+
+<div class="top-row pl-4 navbar navbar-dark">
     <a class="navbar-brand" href="">Amino</a>
     <button class="navbar-toggler" @onclick="ToggleNavMenu">
         <span class="navbar-toggler-icon"></span>
@@ -15,12 +18,12 @@
                     </NavLink>
                 </li>
                 <li class="nav-item px-3">
-                    <NavLink class="nav-link" href="authentication/logout" Match="NavLinkMatch.All">
+                    <NavLink class="nav-link" href="#" @onclick="BeginSignOut" Match="NavLinkMatch.All">
                         <span class="oi oi-account-logout" aria-hidden="true"></span> Log out
                     </NavLink>
                 </li>
                 @*<a href="authentication/profile">Hello, @context.User.Identity.Name!</a>
-                <button class="nav-link btn btn-link" @onclick="BeginSignOut">Log out</button>*@
+                    <button class="nav-link btn btn-link" @onclick="BeginSignOut">Log out</button>*@
             </Authorized>
             <NotAuthorized>
                 <li class="nav-item px-3">
@@ -34,7 +37,7 @@
                     </NavLink>
                 </li>
                 @*<a href="authentication/register">Register</a>
-                <a href="authentication/login">Log in</a>*@
+                    <a href="authentication/login">Log in</a>*@
             </NotAuthorized>
         </AuthorizeView>
         <li class="nav-item px-3">
@@ -84,4 +87,12 @@
     {
         collapseNavMenu = !collapseNavMenu;
     }
+
+
+    private async Task BeginSignOut(MouseEventArgs args)
+    {
+        await SignOutManager.SetSignOutState();
+        Navigation.NavigateTo("authentication/logout");
+    }
 }
+

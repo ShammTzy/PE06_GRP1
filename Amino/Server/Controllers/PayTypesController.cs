@@ -91,13 +91,13 @@ namespace Amino.Server.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePayType(int id)
         {
-            var paytype = _unitOfWork.Customers.Get(p => p.Id == id);
+            var paytype = _unitOfWork.PayTypes.Get(p => p.Id == id);
             if (paytype == null)
             {
                 return NotFound();
             }
 
-            await _unitOfWork.Customers.Delete(id);
+            await _unitOfWork.PayTypes.Delete(id);
             await _unitOfWork.Save(HttpContext);
 
             return NoContent();

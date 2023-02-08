@@ -1,21 +1,23 @@
-﻿@page "/orders/edit/{Id:int}"
+﻿@page "/orders/edit/{id:int}"
 @inject HttpClient _client
 @inject NavigationManager _navManager
 
-<h3>Edit</h3>
+<h3>Edit Order</h3>
+<FormComponent ButtonText="Update" OnValidSubmit="EditOrder" Order="order" />
+
 @code {
     [Parameter] public int id { get; set; }
     Order order = new Order();
 
 
-    //protected async override Task OnParametersSetAsync()
-    //{
-      //  order = await _client.GetFromJsonAsync(Endpoints.OrdersEndPoint, Id);
-   // }
+    protected async override Task OnParametersSetAsync()
+    {
+        order = await _client.GetFromJsonAsync<Order>($"{Endpoints.OrdersEndPoint}/{id}");
+    }
 
-   // async Task EditOrder()
-    //{
-      // await _client.Update(EndPoints.VehiclesEndPoint, vehicle, id);
-        //_navManager.NavigateTo("/vehicles/");
-    //}
+    async Task EditOrder()
+    {
+        await _client.PutAsJsonAsync($"{Endpoints.OrdersEndPoint}/{id}", order);
+        _navManager.NavigateTo("/orders/");
+    }
 }

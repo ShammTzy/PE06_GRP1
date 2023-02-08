@@ -1,0 +1,23 @@
+﻿@page "/platforms/edit/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>Edit Platform</h3>
+<FormComponent ButtonText="Update" OnValidSubmit="EditPlatform" Platform="platform" />
+
+@code {
+    [Parameter] public int id { get; set; }
+    Platform platform = new Platform();
+
+
+    protected async override Task OnParametersSetAsync()
+    {
+        platform = await _client.GetFromJsonAsync<Platform>($"{Endpoints.PlatformsEndPoint}/{id}");
+    }
+
+    async Task EditPlatform()
+    {
+        await _client.PutAsJsonAsync($"{Endpoints.PlatformsEndPoint}/{id}", platform);
+        _navManager.NavigateTo("/platforms/");
+    }
+}

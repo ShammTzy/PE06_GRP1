@@ -33,7 +33,7 @@
         <a href="/paytypes/view/@paytype.Id" class="btn btn-primary">
             <span class="oi oi-book"></span>
         </a>
-        <a href="/paytype/edit/@paytype.Id" class="btn btn-warning">
+        <a href="/paytypes/edit/@paytype.Id" class="btn btn-warning">
             <span class="oi oi-pencil"></span>
         </a>
         <button class="btn btn-danger" @onclick="@(()=>Delete(paytype.Id))">
@@ -65,7 +65,7 @@
 
     public void Dispose()
     {
-        js.InvokeVoidAsync("DataTablesDispose", "#gamesTable");
+        js.InvokeVoidAsync("DataTablesDispose", "#paytypesTable");
     }
 
 }
