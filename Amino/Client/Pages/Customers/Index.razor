@@ -63,7 +63,7 @@ else
     async Task Delete(int customerId)
     {
         var customer = Customers.First(x => x.Id == customerId);
-        bool confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {customer.EmailAddress}?");
+        bool confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete?");
         if (confirm)
         {
             await _client.DeleteAsync($"{Endpoints.GamesEndPoint}/{customerId}");

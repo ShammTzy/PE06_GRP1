@@ -103,6 +103,7 @@ namespace Amino.Server.Controllers
             return NoContent();
         }
 
+
         private async Task<bool> CustomerExistsAsync(int id)
         {
             var customer = await _unitOfWork.Customers.Get(p => p.Id == id);
