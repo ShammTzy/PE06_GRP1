@@ -1,0 +1,13 @@
+﻿@page "/orders/view/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+<h3>View</h3>
+<FormComponent Order="order" Disabled="true" />
+@code {
+    [Parameter] public int id { get; set; }
+    Order order = new Order();
+    protected async override Task OnParametersSetAsync()
+    {
+        order = await _client.GetFromJsonAsync<Order>($"{Endpoints.OrdersEndPoint}/{id}");
+    }
+}

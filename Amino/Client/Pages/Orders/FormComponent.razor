@@ -3,54 +3,59 @@
 <EditForm Model="@Order" OnValidSubmit="@OnValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
-    <div class="form-group">
-        <label>Game: </label>
-        <div>
-            <InputSelect @bind-Value="Order.GameId" class="form-control">
-                <option value="">-- Select Order --</option>
-                @if (Games != null)
-                {
-                    foreach (var game in Games)
+    <fieldset disabled="@Disabled">
+        <div class="form-group">
+            <label>Game: </label>
+            <div>
+                <InputSelect @bind-Value="Order.GameId" class="form-control">
+                    <option value="">-- Select Order --</option>
+                    @if (Games != null)
                     {
-                        <option value="@game.Id">@game.Name</option>}
-                }
-            </InputSelect>
-            <ValidationMessage For="@(() => Order.GameId)" />
+                        foreach (var game in Games)
+                        {
+                            <option value="@game.Id">@game.Name</option>}
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(() => Order.GameId)" />
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label>Platform: </label>
-        <div>
-            <InputSelect @bind-Value="Order.PlatformId" class="form-control">
-                <option value="">-- Select Platform --</option>
-                @if (Platforms != null)
-                {
-                    foreach (var platform in Platforms)
+        <div class="form-group">
+            <label>Platform: </label>
+            <div>
+                <InputSelect @bind-Value="Order.PlatformId" class="form-control">
+                    <option value="">-- Select Platform --</option>
+                    @if (Platforms != null)
                     {
-                        <option value="@platform.Id">@platform.Name</option>}
-                }
-            </InputSelect>
-            <ValidationMessage For="@(() => Order.PlatformId)" />
+                        foreach (var platform in Platforms)
+                        {
+                            <option value="@platform.Id">@platform.Name</option>}
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(() => Order.PlatformId)" />
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label>Payment Type: </label>
-        <div>
-            <InputSelect @bind-Value="Order.PayTypeId" class="form-control">
-                <option value="">-- Select Payment Type --</option>
-                @if (PayTypes != null)
-                {
-                    foreach (var paytype in PayTypes)
+        <div class="form-group">
+            <label>Payment Type: </label>
+            <div>
+                <InputSelect @bind-Value="Order.PayTypeId" class="form-control">
+                    <option value="">-- Select Payment Type --</option>
+                    @if (PayTypes != null)
                     {
-                        <option value="@paytype.Id">@paytype.Name</option>}
-                }
-            </InputSelect>
-            <ValidationMessage For="@(() => Order.PayTypeId)" />
+                        foreach (var paytype in PayTypes)
+                        {
+                            <option value="@paytype.Id">@paytype.Name</option>}
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(() => Order.PayTypeId)" />
+            </div>
         </div>
-    </div>
-    <button type="submit" class="btn btn-success btn-block">
-        Create Order
-    </button>
+    </fieldset>
+    @if (!Disabled)
+    {
+        <button type="submit" class="btn btn-success btn-block">
+            @ButtonText
+        </button>
+    }
     <BackToList Target="orders" />
 </EditForm>
 <br />

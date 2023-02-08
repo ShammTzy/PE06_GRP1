@@ -3,40 +3,45 @@
 <EditForm Model="@Payment" OnValidSubmit="@OnValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
-    <div class="form-group">
-        <label>Customer: </label>
-        <div>
-            <select @bind="Payment.CustomerId" class="form-control">
-                <option value="">-- Select Customer --</option>
-                @if (Customers != null)
-                {
-                    @foreach (var customer in Customers)
+    <fieldset disabled="@Disabled">
+        <div class="form-group">
+            <label>Customer: </label>
+            <div>
+                <select @bind="Payment.CustomerId" class="form-control">
+                    <option value="">-- Select Customer --</option>
+                    @if (Customers != null)
                     {
-                        <option value="@customer.Id">@customer.TaxId | @customer.EmailAddress</option>
-}}
-            </select>
-            <ValidationMessage For="@(()=>Payment.CustomerId)" />
+                        @foreach (var customer in Customers)
+                        {
+                            <option value="@customer.Id">@customer.TaxId | @customer.EmailAddress</option>
+                        }}
+                </select>
+                <ValidationMessage For="@(()=>Payment.CustomerId)" />
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label>Order: </label>
-        <div>
-            <select @bind="Payment.OrderId" class="form-control">
-                <option value="">-- Select Orders --</option>
-                @if (Orders != null)
-                {
-                    @foreach (var order in Orders)
+        <div class="form-group">
+            <label>Order: </label>
+            <div>
+                <select @bind="Payment.OrderId" class="form-control">
+                    <option value="">-- Select Orders --</option>
+                    @if (Orders != null)
                     {
-                        <option value="@order.Id">@order.Game.Name | @order.Platform.Name | @order.PayType.Name</option>
+                        @foreach (var order in Orders)
+                        {
+                            <option value="@order.Id">@order.Game.Name | @order.Platform.Name | @order.PayType.Name</option>
+                        }
                     }
-                }
-            </select>
-            <ValidationMessage For="@(()=>Payment.OrderId)" />
+                </select>
+                <ValidationMessage For="@(()=>Payment.OrderId)" />
+            </div>
         </div>
-    </div>
-    <button type="submit" class="btn btn-success btn-block">
-        Create Order
-    </button>
+    </fieldset>
+    @if (!Disabled)
+    {
+        <button type="submit" class="btn btn-success btn-block">
+            @ButtonText
+        </button>
+    }
     <BackToList Target="payments" />
 </EditForm>
 <br />

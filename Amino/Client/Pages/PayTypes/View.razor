@@ -1,0 +1,13 @@
+﻿@page "/paytypes/view/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+<h3>View</h3>
+<FormComponent PayType="paytype" Disabled="true" />
+@code {
+    [Parameter] public int id { get; set; }
+    PayType paytype = new PayType();
+    protected async override Task OnParametersSetAsync()
+    {
+        paytype = await _client.GetFromJsonAsync<PayType>($"{Endpoints.PayTypesEndPoint}/{id}");
+    }
+}
