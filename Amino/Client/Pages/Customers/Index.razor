@@ -18,7 +18,7 @@
 <div class="alert alert-info">Loading Customers...</div> }
 else
 {
-<table class="table" id="customersTable">
+<table class="table table-responsive" id="customersTable">
     <thead>
         <tr>
             <th>Full Name</th>
@@ -69,6 +69,10 @@ else
             await _client.DeleteAsync($"{Endpoints.CustomersEndPoint}/{customerId}");
             await OnInitializedAsync();
         }
+    }
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        await js.InvokeVoidAsync("AddDataTable", "#customersTable");
     }
 
     public void Dispose()

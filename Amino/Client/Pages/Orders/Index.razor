@@ -20,7 +20,7 @@
 }
 else
 {
-    <table class="table table-responsive">
+    <table class="table table-responsive" id="ordersTable">
         <thead>
             <tr>
                 <th>Game</th>
@@ -33,23 +33,23 @@ else
             @foreach (var order in Orders)
             {
 
-            <tr>
-                <td>@order.Game.Name</td>
-                <td>@order.Platform.Name</td>
-                <td>@order.PayType.Name</td>
+                <tr>
+                    <td>@order.Game.Name</td>
+                    <td>@order.Platform.Name</td>
+                    <td>@order.PayType.Name</td>
 
-                <td>
-                    <a href="/orders/view/@order.Id" class="btn btn-primary">
-                        <span class="oi oi-book"></span>
-                    </a>
-                    <a href="/orders/edit/@order.Id" class="btn btn-warning">
-                        <span class="oi oi-pencil"></span>
-                    </a>
-                    <button class="btn btn-danger" @onclick="@(()=>Delete(order.Id))">
-                        <span class="oi oi-delete"></span>
-                    </button>
-                </td>
-            </tr>
+                    <td>
+                        <a href="/orders/view/@order.Id" class="btn btn-primary">
+                            <span class="oi oi-book"></span>
+                        </a>
+                        <a href="/orders/edit/@order.Id" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span>
+                        </a>
+                        <button class="btn btn-danger" @onclick="@(()=>Delete(order.Id))">
+                            <span class="oi oi-delete"></span>
+                        </button>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
@@ -73,10 +73,14 @@ else
             await OnInitializedAsync();
         }
     }
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        await js.InvokeVoidAsync("AddDataTable", "#ordersTable");
+    }
 
     public void Dispose()
     {
         js.InvokeVoidAsync("DataTablesDispose", "#ordersTable");
-    } 
+    }
 
 }

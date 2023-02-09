@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 
 namespace Amino.Server
 {
@@ -35,6 +36,7 @@ namespace Amino.Server
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddIdentityServer()

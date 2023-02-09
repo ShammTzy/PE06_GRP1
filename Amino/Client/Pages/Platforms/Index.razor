@@ -1,6 +1,7 @@
 ﻿@page "/platforms/"
 @inject HttpClient  _client
 @inject IJSRuntime js
+@inject HttpInterceptorService _interceptor
 @implements IDisposable
 @attribute [Authorize]
 
@@ -18,7 +19,7 @@
 <div class="alert alert-info">Loading Platforms...</div> }
 else
 {
-<table class="table" id="platformsTable">
+<table class="table table-responsive" id="platformsTable">
     <thead>
         <tr>
             <th>Name</th>
@@ -48,26 +49,35 @@ else
 </table>}
 
 @code 
-{ private List<Platform> Platforms;
+{ 
+    private List<Platform> Platforms;
 
-            protected async override Task OnInitializedAsync()
-            {
-                Platforms = await _client.GetFromJsonAsync<List<Platform>>($"{Endpoints.PlatformsEndPoint}");
-            }
+    protected async override Task OnInitializedAsync()
+    {
+        _interceptor.MonitorEvent();
+        Platforms = await _client.GetFromJsonAsync<List<Platform>>($"{Endpoints.PlatformsEndPoint}");
+    }
 
-            async Task Delete(int platformId)
-            {
-                var platform = Platforms.First(x => x.Id == platformId);
-                bool confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete?");
-                if (confirm)
-                {
-                    await _client.DeleteAsync($"{Endpoints.PlatformsEndPoint}/{platformId}");
-                    await OnInitializedAsync();
-                }
-            }
+    async Task Delete(int platformId)
+    {
+        var platform = Platforms.First(x => x.Id == platformId);
+        bool confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete?");
+        if (confirm)
+        {
+            await _client.DeleteAsync($"{Endpoints.PlatformsEndPoint}/{platformId}");
+            await OnInitializedAsync();
+        }
+    }
 
-            public void Dispose()
-            {
-                js.InvokeVoidAsync("DataTablesDispose", "#platformsTable");
-            } }
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        await js.InvokeVoidAsync("AddDataTable", "#platformsTable");
+    }
+
+    public void Dispose()
+    {
+        js.InvokeVoidAsync("DataTablesDispose", "#platformsTable");
+    }
+
+ }
 

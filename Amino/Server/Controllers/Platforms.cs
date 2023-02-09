@@ -27,6 +27,7 @@ namespace Amino.Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetPlatforms()
         {
+            //return NotFound();
             var platforms = await _unitOfWork.Platforms.GetAll();
             return Ok(platforms);
         }

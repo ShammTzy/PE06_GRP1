@@ -8,7 +8,7 @@
 <br />
 <a href="/payments/create" class="btn btn-secondary">
     <span class="oi oi-plus"></span>
-    Create New Payments
+    Create New Payment
 </a>
 <br />
 <br />
@@ -18,7 +18,7 @@
 <div class="alert alert-info">Loading Payments...</div> }
 else
 {
-<table class="table" id="paymentsTable">
+<table class="table table-responsive" id="paymentsTable">
     <thead>
         <tr>
             <th>Customer</th>
@@ -52,25 +52,30 @@ else
 { 
     private List<Payment> Payments;
 
-            protected async override Task OnInitializedAsync()
-            {
-                Payments = await _client.GetFromJsonAsync<List<Payment>>($"{Endpoints.PaymentsEndPoint}");
-            }
+    protected async override Task OnInitializedAsync()
+    {
+        Payments = await _client.GetFromJsonAsync<List<Payment>>($"{Endpoints.PaymentsEndPoint}");
+    }
 
-            async Task Delete(int paymentId)
-            {
-                var payment = Payments.First(x => x.Id == paymentId);
-                bool confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete?");
-                if (confirm)
-                {
-                    await _client.DeleteAsync($"{Endpoints.PaymentsEndPoint}/{paymentId}");
-                    await OnInitializedAsync();
-                }
-            }
+    async Task Delete(int paymentId)
+    {
+        var payment = Payments.First(x => x.Id == paymentId);
+        bool confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete?");
+        if (confirm)
+        {
+            await _client.DeleteAsync($"{Endpoints.PaymentsEndPoint}/{paymentId}");
+            await OnInitializedAsync();
+        }
+    }
 
-            public void Dispose()
-            {
-                js.InvokeVoidAsync("DataTablesDispose", "#paymentsTable");
-            } 
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        await js.InvokeVoidAsync("AddDataTable", "#paymentsTable");
+    }
+
+    public void Dispose()
+    {
+        js.InvokeVoidAsync("DataTablesDispose", "#paymentsTable");
+    }
     }
 

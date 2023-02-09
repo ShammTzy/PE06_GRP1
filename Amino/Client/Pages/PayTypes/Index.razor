@@ -1,6 +1,7 @@
 ﻿@page "/paytypes/"
 @inject HttpClient _client
 @inject IJSRuntime js
+@implements IDisposable
 @attribute [Authorize]
 
 <h3 class="card-title">Games</h3>
@@ -15,34 +16,35 @@
 @if (PayTypes == null)
 {
 <div class="alert alert-info">Loading PayType...</div> }
-            else
+else
+{
+    <table class="table table-responsive" id="paytypesTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+         @foreach (var paytype in PayTypes)
             {
-<table class="table" id="gamesTable">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var paytype in PayTypes)
-        {
-<tr>
-    <td>@paytype.Name</td>
-    <td>
-        <a href="/paytypes/view/@paytype.Id" class="btn btn-primary">
-            <span class="oi oi-book"></span>
-        </a>
-        <a href="/paytypes/edit/@paytype.Id" class="btn btn-warning">
-            <span class="oi oi-pencil"></span>
-        </a>
-        <button class="btn btn-danger" @onclick="@(()=>Delete(paytype.Id))">
-            <span class="oi oi-delete"></span>
-        </button>
-    </td>
-</tr>}
-    </tbody>
-</table>
+    <tr>
+        <td>@paytype.Name</td>
+        <td>
+            <a href="/paytypes/view/@paytype.Id" class="btn btn-primary">
+                <span class="oi oi-book"></span>
+            </a>
+            <a href="/paytypes/edit/@paytype.Id" class="btn btn-warning">
+                <span class="oi oi-pencil"></span>
+            </a>
+            <button class="btn btn-danger" @onclick="@(()=>Delete(paytype.Id))">
+                <span class="oi oi-delete"></span>
+            </button>
+        </td>
+    </tr>
+    }
+        </tbody>
+    </table>
 }
 @code {
     private List<PayType> PayTypes;
@@ -61,6 +63,11 @@
             await _client.DeleteAsync($"{Endpoints.PayTypesEndPoint}/{paytypeId}");
             await OnInitializedAsync();
         }
+    }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        await js.InvokeVoidAsync("AddDataTable", "#paytypesTable");
     }
 
     public void Dispose()

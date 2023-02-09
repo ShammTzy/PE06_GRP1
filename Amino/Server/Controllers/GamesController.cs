@@ -27,6 +27,7 @@ namespace Amino.Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetGames()
         {
+            //return NotFound();
             var games = await _unitOfWork.Games.GetAll();
             return Ok(games);
         }
